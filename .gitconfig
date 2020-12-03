@@ -1,0 +1,12 @@
+[credential]
+	helper = cache
+[user]
+	name = Milo
+	email = milo.christiansen@gmail.com
+[color]
+	ui = true
+[url "git@gitlab.com:"]
+	insteadOf = https://gitlab.com/
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
