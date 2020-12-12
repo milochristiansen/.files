@@ -28,6 +28,9 @@ ensure_installed git git
 # And ZSH
 ensure_installed zsh zsh
 
+# Micro editor
+ensure_installed micro micro
+
 # And powerline of course.
 sudo $PACMD powerline
 

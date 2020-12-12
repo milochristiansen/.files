@@ -17,6 +17,8 @@ alias egrep='egrep --color=auto'
 
 export LESS="-F $LESS"
 
+export EDITOR=micro
+
 # Go support
 if [ -d ~/Projects/Go ]; then
 	export GOPATH=~/Projects/Go
