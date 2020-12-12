@@ -1,6 +1,7 @@
 {
     "colorcolumn": 120,
     "diffgutter": true,
+    "gofmt": true,
     "indentchar": "\t",
     "softwrap": true
 }

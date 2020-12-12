@@ -30,6 +30,7 @@ ensure_installed zsh zsh
 
 # Micro editor
 ensure_installed micro micro
+micro -plugin install go
 
 # And powerline of course.
 sudo $PACMD powerline
