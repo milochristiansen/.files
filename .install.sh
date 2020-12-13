@@ -32,6 +32,7 @@ ensure_installed zsh zsh
 ensure_installed micro micro
 micro -plugin install go
 micro -plugin install quoter
+micro -plugin install manipulator
 
 # tmux
 ensure_installed tmux tmux
