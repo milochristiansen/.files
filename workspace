@@ -22,9 +22,9 @@ tmux has-session -t Main 2>/dev/null
 
 if [ $? != 0 ]; then
 	tmux new -s Main -n Home -d -x - -y - 'cd ~ && zsh'
-	tmux split-window -h "cd $2 && zsh"
-	tmux split-window -v -t 0 "cd $2 && zsh"
-	tmux split-window -v -t 2 "cd $2 && zsh"
+	tmux split-window -h "cd ~ && zsh"
+	tmux split-window -v -t 0 "cd ~ && zsh"
+	tmux split-window -v -t 2 "cd ~ && zsh"
 
 	newWorkspace Work-1 "~/Projects/HTML/ravennastructures.com"
 	newWorkspace Work-2 "~/Projects/Modules/ecore"
