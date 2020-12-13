@@ -17,7 +17,7 @@ alias egrep='egrep --color=auto'
 
 alias dir='clear && tree -L 2'
 
-export LESS="-F $LESS"
+export LESS="-F --mouse --wheel-lines=3 $LESS"
 
 export EDITOR=micro
 
@@ -37,4 +37,10 @@ fi
 # Kubectl auto completion
 if command -v kubectl &> /dev/null; then
 	source <(kubectl completion zsh)
+fi
+
+# Allow opening interactive shells with persist.
+if [[ $1 == eval ]]; then
+	"$@"
+	set --
 fi

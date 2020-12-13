@@ -1,0 +1,39 @@
+#! /bin/sh
+
+function termWindow {
+	tmux neww -n "Terms-$1" "cd $2 && zsh"
+	tmux split-window -h "cd $2 && zsh"
+	tmux split-window -v -t 0 "cd $2 && zsh"
+	tmux split-window -v -t 2 "cd $2 && zsh"
+}
+
+function editorWindow {
+	tmux neww -n "Editor-$1" "cd $2 && zsh"
+	tmux split-window -h -p 80 "cd $2 && $EDITOR"
+	tmux split-window -v -t 0 "cd $2 && zsh -is eval dir"
+}
+
+function newWorkspace {
+	editorWindow $1 $2
+	termWindow $1 $2
+}
+
+tmux has-session -t Main 2>/dev/null
+
+if [ $? != 0 ]; then
+	tmux new -s Main -n Home -d -x - -y - 'cd ~ && zsh'
+	tmux split-window -h "cd $2 && zsh"
+	tmux split-window -v -t 0 "cd $2 && zsh"
+	tmux split-window -v -t 2 "cd $2 && zsh"
+
+	newWorkspace Work-1 "~/Projects/HTML/ravennastructures.com"
+	newWorkspace Work-2 "~/Projects/Modules/ecore"
+	newWorkspace RSN2 "~/Projects/HTML/RSN2"
+	newWorkspace Scratch "~"
+fi
+
+if [[ "$1" == "new" ]]; then
+	newWorkspace $2 $3
+else
+	tmux attach-session -t Main
+fi
