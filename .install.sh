@@ -32,6 +32,8 @@ ensure_installed zsh zsh
 ensure_installed micro micro
 micro -plugin install go
 
+ensure_installed tree tree
+
 # And powerline of course.
 sudo $PACMD powerline
 
