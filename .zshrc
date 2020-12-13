@@ -15,7 +15,7 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias dir='tree -L 2'
+alias dir='clear && tree -L 2'
 
 export LESS="-F $LESS"
 
