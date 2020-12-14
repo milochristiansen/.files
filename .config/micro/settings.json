@@ -3,6 +3,6 @@
     "diffgutter": true,
     "gofmt": true,
     "indentchar": "\t",
-    "quoter.enable": true,
+    "mkparents": true,
     "softwrap": true
 }

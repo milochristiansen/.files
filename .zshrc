@@ -13,7 +13,9 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias dir='clear && tree -C -F -I "node_modules"'
+export TREE_FILTERS="node_modules|.git"
+
+alias dir='clear && tree -C -F -I "$TREE_FILTERS"'
 
 export LESS="-F --mouse --wheel-lines=3 $LESS"
 
