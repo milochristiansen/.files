@@ -7,8 +7,6 @@ fi
 # Dot files config command
 alias .config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
-export TERM=xterm-256color
-
 # Add some color to my life
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'

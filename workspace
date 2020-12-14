@@ -10,7 +10,7 @@ function termWindow {
 function editorWindow {
 	tmux neww -n "Editor-$1" "cd $2 && zsh"
 	tmux split-window -h -p 80 "cd $2 && $EDITOR"
-	tmux split-window -v -t 0 "cd $2 && zsh -is eval dir"
+	tmux split-window -v -t 0 -p 75 "cd $2 && zsh -is eval dir"
 }
 
 function newWorkspace {

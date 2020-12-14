@@ -33,6 +33,9 @@ ensure_installed micro micro
 micro -plugin install go
 micro -plugin install quoter
 micro -plugin install manipulator
+micro -plugin install aspell
+
+ensure_installed aspell aspell
 
 # tmux
 ensure_installed tmux tmux
