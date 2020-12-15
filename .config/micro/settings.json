@@ -4,5 +4,6 @@
     "gofmt": true,
     "indentchar": "\t",
     "mkparents": true,
-    "softwrap": true
+    "softwrap": true,
+    "eofnewline": false
 }

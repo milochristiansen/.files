@@ -17,31 +17,31 @@ fi
 
 function ensure_installed {
 	if ! command -v $1; then
-		sudo $PACMD $2
+		sudo $PACMD $@
 		return $?
 	fi
 }
 
 # Make sure git is installed
-ensure_installed git git
+ensure_installed git
 
 # And ZSH
-ensure_installed zsh zsh
+ensure_installed zsh
 
 # Micro editor
-ensure_installed micro micro
+ensure_installed micro
 micro -plugin install go
 micro -plugin install quoter
 micro -plugin install manipulator
 micro -plugin install aspell
 
-ensure_installed aspell aspell
+ensure_installed aspell aspell-en
 
 # tmux
-ensure_installed tmux tmux
+ensure_installed tmux
 
 # Tree (used by my tmux config)
-ensure_installed tree tree
+ensure_installed tree
 
 # Finally powerline, of course.
 sudo $PACMD powerline
