@@ -1,9 +1,9 @@
 {
     "colorcolumn": 120,
     "diffgutter": true,
+    "eofnewline": false,
     "gofmt": true,
     "indentchar": "\t",
     "mkparents": true,
-    "softwrap": true,
-    "eofnewline": false
+    "softwrap": true
 }

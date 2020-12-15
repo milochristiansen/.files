@@ -1,1 +1,15 @@
-.cfg 
+*
+ 
+!.alacritty.yml
+!.config
+!.config/micro
+!.config/micro/bindings.json
+!.config/micro/settings.json
+!.gitconfig
+!.gitignore
+!.install.sh
+!.tmux.conf
+!.zshrc
+!workspace
+!bin
+!bin/git-track
