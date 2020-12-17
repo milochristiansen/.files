@@ -10,6 +10,15 @@ function pathadd {
     fi
 }
 
+export SESSION_TYPE="local"
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+	SESSION_TYPE="remote/ssh"
+else
+	case $(ps -o comm= -p $PPID) in
+		sshd|*/sshd) SESSION_TYPE=remote/ssh;;
+	esac
+fi
+
 # Dot files config command
 # Also edit ~/bin/git-track and ~/.install.sh
 alias .config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
@@ -27,7 +36,7 @@ alias dir='clear && tree -C -F -I "$TREE_FILTERS"'
 # Give me that sweet, sweet mouse action, and don't use a pager for short outputs.
 export LESS="-F --mouse --wheel-lines=3 $LESS"
 
-# Because I'm not a heathen
+# Because I'm not a vim heathen
 export EDITOR=micro
 
 pathadd "$HOME/bin"
@@ -49,6 +58,19 @@ fi
 if command -v kubectl &> /dev/null; then
 	source <(kubectl completion zsh)
 fi
+
+# On wacked out old terminals, set this to true
+export TMUX_USE_XCLIP=false
+
+# Enable GPG SSH support
+export GPG_TTY="$(tty)"
+if [ "$SESSION_TYPE" = "local" ]; then
+	export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+fi
+gpgconf --launch gpg-agent
+
+# ID for my GPG key
+export $KEYID=0x6AE9716B068C0647
 
 # Allow opening interactive shells with persist.
 # Used by my tmux startup script.

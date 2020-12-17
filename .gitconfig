@@ -3,6 +3,7 @@
 [user]
 	name = Milo
 	email = milo.christiansen@gmail.com
+	signingkey = 0x6AE9716B068C0647
 [color]
 	ui = true
 [url "git@gitlab.com:"]

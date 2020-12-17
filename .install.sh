@@ -2,11 +2,14 @@
 
 # This script should support at least Debian-based and Arch-based distros.
 PACMD=
+PACMAN=
 if ! command -v apt-get; then
 	PACMD='apt-get install'
+	PACMAN="apt"
 fi
 if ! command -v pacman; then
 	PACMD='pacman -S'
+	PACMAN="pacman"
 fi
 
 echo $PACMD
@@ -42,6 +45,13 @@ ensure_installed tmux
 
 # Tree (used by my tmux config)
 ensure_installed tree
+
+# GPG
+if [ "$PACMAN" = "pacman" ]; then
+	sudo pacman -Syu gnupg pcsclite ccid
+elif [ "$PACMAN" = "apt" ]; then
+	sudo apt -y install wget gnupg2 gnupg-agent dirmngr cryptsetup scdaemon pcscd
+fi
 
 # Finally powerline, of course.
 sudo $PACMD powerline
