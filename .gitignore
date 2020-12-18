@@ -13,3 +13,4 @@
 !workspace
 !bin
 !bin/git-track
+!.workspaces
