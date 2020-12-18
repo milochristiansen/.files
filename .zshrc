@@ -68,7 +68,6 @@ if [ "$SESSION_TYPE" = "local" ]; then
 	export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 fi
 gpgconf --launch gpg-agent
-gpg-connect-agent updatestartuptty /bye >/dev/null
 
 # If git refuses to push code, run this and it will make the pin entry program work.
 function fixpin {
