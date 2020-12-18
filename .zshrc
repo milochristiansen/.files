@@ -68,6 +68,7 @@ if [ "$SESSION_TYPE" = "local" ]; then
 	export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 fi
 gpgconf --launch gpg-agent
+gpg-connect-agent updatestartuptty /bye >/dev/null
 
 # ID for my GPG key
 export KEYID=0x6AE9716B068C0647
