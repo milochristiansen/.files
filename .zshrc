@@ -63,14 +63,14 @@ fi
 export TMUX_USE_XCLIP=false
 
 # Enable GPG SSH support
-export GPG_TTY="$(tty)"
+export GPG_TTY=$(tty)
 if [ "$SESSION_TYPE" = "local" ]; then
 	export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 fi
 gpgconf --launch gpg-agent
 
 # ID for my GPG key
-export $KEYID=0x6AE9716B068C0647
+export KEYID=0x6AE9716B068C0647
 
 # Allow opening interactive shells with persist.
 # Used by my tmux startup script.
