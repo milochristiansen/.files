@@ -30,8 +30,9 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 # TODO: Erite my own replacement for tree with better filtering.
-export TREE_FILTERS="node_modules|.git"
-alias dir='clear && tree -C -F -I "$TREE_FILTERS"'
+# export TREE_FILTERS="node_modules|.git"
+# alias dir='clear && tree -C -F -I "$TREE_FILTERS"'
+alias dir='go run ~/Projects/tree.go $(tput cols)'
 
 # Give me that sweet, sweet mouse action, and don't use a pager for short outputs.
 export LESS="-F --mouse --wheel-lines=3 $LESS"
@@ -70,9 +71,7 @@ fi
 gpgconf --launch gpg-agent
 
 # If git refuses to push code, run this and it will make the pin entry program work.
-function fixpin {
-	gpg-connect-agent updatestartuptty /bye >/dev/null
-}
+alias fixpin='gpg-connect-agent updatestartuptty /bye >/dev/null'
 
 # ID for my GPG key
 export KEYID=0x6AE9716B068C0647

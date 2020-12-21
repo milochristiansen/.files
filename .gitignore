@@ -14,3 +14,7 @@
 !bin
 !bin/git-track
 !.workspaces
+!Projects
+!Projects/tree.go
+!.ssh
+!.ssh/config
