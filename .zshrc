@@ -78,7 +78,7 @@ export KEYID=0x6AE9716B068C0647
 
 # Allow opening interactive shells with persist.
 # Used by my tmux startup script.
-if [[ $1 == eval ]]; then
+if [ $1 = eval ]; then
 	"$@"
 	set --
 fi

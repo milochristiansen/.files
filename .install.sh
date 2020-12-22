@@ -3,12 +3,12 @@
 # This script should support at least Debian-based and Arch-based distros.
 PACMD=
 PACMAN=
-if ! command -v apt-get; then
-	PACMD='apt-get install'
+if command -v apt-get; then
+	PACMD='apt-get install -qq'
 	PACMAN="apt"
 fi
-if ! command -v pacman; then
-	PACMD='pacman -S'
+if command -v pacman; then
+	PACMD='pacman -Syu'
 	PACMAN="pacman"
 fi
 
@@ -61,6 +61,12 @@ function .config {
 	/usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" $@
 }
 
+ssh git@github.com
+if [ $? = 255 ]; then
+	echo "Could not authenticate with github."
+	exit 1 
+fi
+
 # Pull the files
 git clone --bare git@github.com:milochristiansen/.files.git $HOME/.cfg
 mkdir -p .config-backup
@@ -72,4 +78,3 @@ else
     .config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
 fi;
 .config checkout
-.config config status.showUntrackedFiles no
