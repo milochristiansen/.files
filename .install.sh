@@ -61,11 +61,16 @@ function .config {
 	/usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" $@
 }
 
-ssh git@github.com
+ssh -T git@github.com
 if [ $? = 255 ]; then
 	echo "Could not authenticate with github."
-	exit 1 
+	exit 2 
 fi
+
+function backup {
+	mkdir -p `dirname "$1"`
+	mv "$1" ".config-backup/$1"
+}
 
 # Pull the files
 git clone --bare git@github.com:milochristiansen/.files.git $HOME/.cfg
@@ -75,6 +80,10 @@ if [ $? = 0 ]; then
   echo "Checked out config.";
 else
     echo "Backing up pre-existing files.";
-    .config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
+    .config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} backup {}
 fi;
 .config checkout
+
+sudo usermod --shell /bin/zsh $USER
+
+exec zsh
