@@ -61,12 +61,6 @@ function .config {
 	/usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" $@
 }
 
-ssh -T git@github.com
-if [ $? = 255 ]; then
-	echo "Could not authenticate with github."
-	exit 2 
-fi
-
 function backup {
 	mkdir -p `dirname "$1"`
 	mv "$1" ".config-backup/$1"
