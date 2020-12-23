@@ -61,11 +61,6 @@ function .config {
 	/usr/bin/git --git-dir="$HOME/.cfg/" --work-tree="$HOME" $@
 }
 
-function backup {
-	mkdir -p `dirname "$1"`
-	mv "$1" ".config-backup/$1"
-}
-
 # Pull the files
 git clone --bare git@github.com:milochristiansen/.files.git $HOME/.cfg
 mkdir -p .config-backup
@@ -74,10 +69,10 @@ if [ $? = 0 ]; then
   echo "Checked out config.";
 else
     echo "Backing up pre-existing files.";
-    .config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} backup {}
+    .config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs /bin/bash -c 'mkdir -p `dirname ".config-backup/$@"`; mv "$@" ".config-backup/$@"' ''
 fi;
 .config checkout
 
 sudo usermod --shell /bin/zsh $USER
 
-exec zsh
+echo "Log out and back in to complete setup."
