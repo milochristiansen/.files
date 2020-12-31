@@ -2,6 +2,18 @@
     "colorcolumn": 120,
     "diffgutter": true,
     "eofnewline": false,
+    "ft:go": {
+        "aspell.args": "--mode=ccpp",
+        "aspell.check": "on"
+    },
+    "ft:js": {
+        "aspell.args": "--mode=ccpp",
+        "aspell.check": "on"
+    },
+    "ft:vue": {
+        "aspell.args": "--mode=ccpp",
+        "aspell.check": "on"
+    },
     "gofmt": true,
     "indentchar": "\t",
     "mkparents": true,
