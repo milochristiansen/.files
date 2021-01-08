@@ -3,8 +3,8 @@ package main
 import "os"
 import "fmt"
 import "sort"
-import "strconv"
 import "github.com/alessio/shellescape"
+import "golang.org/x/crypto/ssh/terminal"
 
 const (
 	T         = "├── "
@@ -41,12 +41,20 @@ const (
 var FileLimit = 20
 
 var Width = 0
+var Filters = map[string]bool{".git": true, "node_modules": true}
 
 func main() {
+	width, _, err := terminal.GetSize(int(os.Stdin.Fd()))
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	Width = width
+
 	fmt.Printf("%v.\n", ClearScreen)
 
-	if len(os.Args) > 1 {
-		Width, _ = strconv.Atoi(os.Args[1])
+	for i := 1; i < len(os.Args); i++ {
+		Filters[os.Args[i]] = true
 	}
 
 	walkDIR(".", []string{}, 0)
@@ -84,7 +92,7 @@ func walkDIR(path string, depths []string, limit int) {
 
 		if f.IsDir() {
 			fmt.Printf("%v%v%v%v/\n", prefix(depths, last), LightBlue, f.Name(), EndColor)
-			if f.Name() == ".git" || f.Name() == "node_modules" {
+			if Filters[f.Name()] {
 				fmt.Printf("%v%v...%v\n", prefix(append(depths, mypre), L), LightRed, EndColor)
 				continue
 			}

@@ -29,10 +29,8 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-# TODO: Erite my own replacement for tree with better filtering.
-# export TREE_FILTERS="node_modules|.git"
-# alias dir='clear && tree -C -F -I "$TREE_FILTERS"'
-alias dir='go run ~/Projects/tree.go $(tput cols)'
+# Custom tree, used by tmux
+alias dir='~/Projects/tree.bin'
 
 # Give me that sweet, sweet mouse action, and don't use a pager for short outputs.
 export LESS="-F --mouse --wheel-lines=3 $LESS"

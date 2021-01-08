@@ -43,9 +43,6 @@ ensure_installed aspell aspell-en
 # tmux
 ensure_installed tmux
 
-# Tree (used by my tmux config)
-ensure_installed tree
-
 # GPG
 if [ "$PACMAN" = "pacman" ]; then
 	sudo pacman -Syu gnupg pcsclite ccid
@@ -72,6 +69,8 @@ else
     .config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs /bin/bash -c 'mkdir -p `dirname ".config-backup/$@"`; mv "$@" ".config-backup/$@"' ''
 fi;
 .config checkout
+
+go build -o ~/Projects/tree.bin ~/Projects/tree.go
 
 sudo usermod --shell /bin/zsh $USER
 
