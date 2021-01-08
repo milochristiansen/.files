@@ -4,13 +4,13 @@ function window {
 	if [ "$1" = "editor" ]; then 
 		tmux neww -n "$2" "cd $3 && zsh"
 		tmux split-window -h -p 80 "cd $3 && zsh -is eval $EDITOR"
-		tmux split-window -v -t 0 -p 75 "cd $3 && zsh -is eval dir"
+		tmux split-window -v -t 0 -p 75 "cd $3 && zsh -is eval dir $4"
 	elif [ "$1" = "deluxe" ]; then
 		tmux neww -n "$2" "cd $3 && zsh"
 		tmux split-window -h -p 80 "cd $3 && zsh -is eval $EDITOR"
 		tmux split-window -h "cd $3 && zsh"
 		tmux split-window -v "cd $3 && zsh"
-		tmux split-window -v -t 0 -p 75 "cd $3 && zsh -is eval dir"
+		tmux split-window -v -t 0 -p 75 "cd $3 && zsh -is eval dir $4"
 	elif [ "$1" = "terms" ]; then
 		tmux neww -n "$2" "cd $3 && zsh"
 		tmux split-window -h "cd $3 && zsh"
