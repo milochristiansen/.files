@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # Are we in a shared acount?
-export SESSION_SHARED=false
+export SESSION_SHARED=true
 if [ "$USER" = "milo" ]; then
-	SESSION_SHARED=true
+	SESSION_SHARED=false
 fi
 
 if $SESSION_SHARED; then
