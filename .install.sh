@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
+# Are we in a shared acount?
+export SESSION_SHARED=false
+if [ "$USER" = "milo" ]; then
+	SESSION_SHARED=true
+fi
+
+if $SESSION_SHARED; then
+	echo "Shared account, disabling some functionality."
+else
+	echo "Dedicated account, full functionality activated."
+fi
+
 # This script should support at least Debian-based and Arch-based distros.
 PACMD=
 PACMAN=
@@ -72,6 +84,8 @@ fi;
 
 go build -o ~/Projects/tree.bin ~/Projects/tree.go
 
-sudo usermod --shell /bin/zsh $USER
+if ! $SESSION_SHARED; then
+	sudo usermod --shell /bin/zsh $USER
+fi
 
 echo "Log out and back in to complete setup."

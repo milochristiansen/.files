@@ -1,4 +1,28 @@
 
+# Detect if we are local or remote.
+export SESSION_TYPE="local"
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+	SESSION_TYPE="remote/ssh"
+else
+	case $(ps -o comm= -p $PPID) in
+		sshd|*/sshd) SESSION_TYPE=remote/ssh;;
+	esac
+fi
+
+echo "Session Type: $SESSION_TYPE"
+
+# Are we in a shared acount?
+export SESSION_SHARED=true
+if [ "$USER" = "milo" ]; then
+	SESSION_SHARED=false
+fi
+
+if $SESSION_SHARED; then
+	echo "Shared account, disabling some functionality."
+else
+	echo "Dedicated account, full functionality activated."
+fi
+
 # Include the stuff I want from the manjaro config
 setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
 setopt nocaseglob                                               # Case insensitive globbing
@@ -83,15 +107,6 @@ function pathadd {
     fi
 }
 
-export SESSION_TYPE="local"
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-	SESSION_TYPE="remote/ssh"
-else
-	case $(ps -o comm= -p $PPID) in
-		sshd|*/sshd) SESSION_TYPE=remote/ssh;;
-	esac
-fi
-
 # Dot files config command
 # Also edit ~/bin/git-track and ~/.install.sh
 alias .config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
@@ -109,7 +124,9 @@ alias dir='~/Projects/tree.bin'
 export LESS="-F --mouse --wheel-lines=3 $LESS"
 
 # Because I'm not a vim heathen
-export EDITOR=micro
+if ! $SESSION_SHARED; then
+	export EDITOR=micro
+fi
 
 pathadd "$HOME/bin"
 
