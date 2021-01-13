@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
+# Detect if we are local or remote.
+export SESSION_TYPE="local"
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+	SESSION_TYPE="remote/ssh"
+else
+	case $(ps -o comm= -p $PPID) in
+		sshd|*/sshd) SESSION_TYPE=remote/ssh;;
+	esac
+fi
+
+echo "Session Type: $SESSION_TYPE"
+
 # Are we in a shared acount?
 export SESSION_SHARED=true
 if [ "$USER" = "milo" ]; then
@@ -32,7 +44,12 @@ fi
 
 function ensure_installed {
 	if ! command -v $1; then
-		sudo $PACMD $@
+		if [ "$2" = "" ]; then
+			sudo $PACMD $1
+			return $?
+		fi
+		
+		sudo $PACMD ${@: 2}
 		return $?
 	fi
 }
@@ -44,16 +61,33 @@ ensure_installed git
 ensure_installed zsh
 
 # Micro editor
-ensure_installed micro
-micro -plugin install go
-micro -plugin install quoter
-micro -plugin install manipulator
-micro -plugin install aspell
+if ! command -v micro; then
+	pushd ~/bin
+	curl https://getmic.ro | bash
+	popd
 
-ensure_installed aspell aspell-en
+	~/bin/micro -plugin install go
+	~/bin/micro -plugin install quoter
+	~/bin/micro -plugin install manipulator
+	~/bin/micro -plugin install aspell
+fi
+
+ensure_installed aspell aspell aspell-en
+
+if [ "SESSION_TYPE" = "local" ]; then
+	# go
+	ensure_installed go golang-go
+	ensure_installed go go
+	
+	pushd ~/Projects/Modules/tree
+	go build -o ~/bin/dir
+	popd
+fi
 
 # tmux
-ensure_installed tmux
+if [ "$SESSION_TYPE" = "local" ]; then
+	ensure_installed tmux
+fi
 
 # GPG
 if [ "$PACMAN" = "pacman" ]; then
@@ -71,7 +105,7 @@ function .config {
 }
 
 # Pull the files
-git clone --bare git@github.com:milochristiansen/.files.git $HOME/.cfg
+git clone --bare git@github.com:milochristiansen/.files.git "$HOME/.cfg"
 mkdir -p .config-backup
 .config checkout
 if [ $? = 0 ]; then
@@ -81,8 +115,6 @@ else
     .config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs /bin/bash -c 'mkdir -p `dirname ".config-backup/$@"`; mv "$@" ".config-backup/$@"' ''
 fi;
 .config checkout
-
-go build -o ~/Projects/tree.bin ~/Projects/tree.go
 
 if ! $SESSION_SHARED; then
 	sudo usermod --shell /bin/zsh $USER
