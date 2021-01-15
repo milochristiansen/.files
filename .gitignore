@@ -14,7 +14,10 @@
 !bin
 !bin/git-track
 !.workspaces
-!Projects
-!Projects/tree.go
 !.ssh
 !.ssh/config
+!Projects/Modules
+!Projects/Modules/tree
+!Projects/Modules/tree.go
+!Projects/Modules/tree/go.mod
+!Projects/Modules/tree/go.sum

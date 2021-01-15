@@ -10,3 +10,4 @@ window deluxe "Werab"   "~/Projects/HTML/werabcontainers" img
 window deluxe "ECore"   "~/Projects/Modules/ecore"
 window deluxe "QBO"     "~/Projects/Modules/quickbooks-go"
 window deluxe "RSN2"    "~/Projects/HTML/RSN2"
+window deluxe "Shady"   "~/Projects/HTML/ShadyMarket"
