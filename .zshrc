@@ -135,7 +135,7 @@ pathadd "$HOME/bin"
 if [ -d ~/Projects/Go ]; then
 	export GOPATH=~/Projects/Go
 fi
-export GOPROXY=goproxy.raswith.com:3000
+export GOPROXY=http://goproxy.raswith.com:3000
 
 # Powerline prompt
 powerline-daemon -q
