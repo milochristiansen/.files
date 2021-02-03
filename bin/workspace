@@ -34,6 +34,8 @@ if [ $? != 0 ]; then
 	tmux split-window -v -t 2 "cd ~ && zsh"
 
 	source ~/.workspaces
+
+	tmux select-window -t Home
 fi
 
 if [ "$1" = "new" ]; then
@@ -42,4 +44,5 @@ elif [ "$1" == "kill" ]; then
 	tmux kill-session -t Main
 else
 	tmux attach-session -t Main
+	tmux select-window -t Home
 fi
