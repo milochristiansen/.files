@@ -106,6 +106,12 @@ function .config {
 
 # Pull the files
 git clone --bare git@github.com:milochristiansen/.files.git "$HOME/.cfg"
+
+# Now setup sparse checkout if we are not on a dedicated, local account.
+if [ "$SESSION_TYPE" != "local" ] || $SESSION_SHARED; then
+	.config sparse-checkout init
+fi
+
 mkdir -p .config-backup
 .config checkout
 if [ $? = 0 ]; then

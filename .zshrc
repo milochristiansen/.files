@@ -160,8 +160,10 @@ if [ "$SESSION_TYPE" = "local" ]; then
 fi
 gpgconf --launch gpg-agent
 
-# If git refuses to push code, run this and it will make the pin entry program work.
-alias fixpin='gpg-connect-agent updatestartuptty /bye >/dev/null'
+if [ "$SESSION_TYPE" = "local" ]; then
+	# If git refuses to push code, run this and it will make the pin entry program work.
+	alias fixpin='gpg-connect-agent updatestartuptty /bye >/dev/null'
+fi
 
 # ID for my GPG key
 export KEYID=0x6AE9716B068C0647

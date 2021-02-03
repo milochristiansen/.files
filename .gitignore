@@ -10,8 +10,8 @@
 !.install.sh
 !.tmux.conf
 !.zshrc
-!workspace
 !bin
+!bin/workspace
 !bin/git-track
 !.workspaces
 !.ssh
