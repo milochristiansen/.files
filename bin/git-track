@@ -26,6 +26,7 @@ for i in $parts; do
 	
 	if ! grep -q "!${acum:1}" ~/.gitignore; then
 		echo "!${acum:1}" >> ~/.gitignore
+		echo "#!${acum:1}" >> ~/.gitsparse
 	fi
 done
 

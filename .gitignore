@@ -7,6 +7,7 @@
 !.config/micro/settings.json
 !.gitconfig
 !.gitignore
+!.gitsparse
 !.install.sh
 !.tmux.conf
 !.zshrc
@@ -21,4 +22,3 @@
 !Projects/Modules/tree.go
 !Projects/Modules/tree/go.mod
 !Projects/Modules/tree/go.sum
-!.gitsparse

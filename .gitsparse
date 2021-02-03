@@ -1,14 +1,24 @@
 /*
 
 !.alacritty.yml
+#!.config
+#!.config/micro
+#!.config/micro/bindings.json
+#.config/micro/settings.json
+#!.gitconfig
+#!.gitignore
+#!.gitsparse
+#!.install.sh
 !.tmux.conf
-!bin
+#!.zshrc
+#!bin
 !bin/workspace
-!bin/git-track
+#!bin/git-track
+!.workspaces
 !.ssh
 !.ssh/config
 !Projects/Modules
 !Projects/Modules/tree
-!Projects/Modules/tree/tree.go
+!Projects/Modules/tree.go
 !Projects/Modules/tree/go.mod
 !Projects/Modules/tree/go.sum

@@ -109,6 +109,12 @@ git clone --bare git@github.com:milochristiansen/.files.git "$HOME/.cfg"
 
 # Now setup sparse checkout if we are not on a dedicated, local account.
 if [ "$SESSION_TYPE" != "local" ] || $SESSION_SHARED; then
+	wget -q -O "$HOME/.gitsparse" "https://raw.githubusercontent.com/milochristiansen/.files/master/.gitsparse"
+	if [ $? = 0 ]; then
+		echo "Could not download required checkout settings."
+		exit 1
+	fi
+	ln -s -T "$HOME/.gitsparse" "$HOME/.cfg/info/sparse-checkout"
 	.config sparse-checkout init
 fi
 
