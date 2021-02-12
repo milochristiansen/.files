@@ -120,6 +120,7 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias ip='ip --color=auto'
 
 # Give me that sweet, sweet mouse action, and don't use a pager for short outputs.
 export LESS="-F --mouse --wheel-lines=3 $LESS"
@@ -167,6 +168,10 @@ fi
 
 # ID for my GPG key
 export KEYID=0x6AE9716B068C0647
+
+if [ -f ~/Sync/transactions.ledger ]; then
+	export LEDGER_FILE=~/Sync/transactions.ledger
+fi
 
 # Allow opening interactive shells with persist.
 # Used by my tmux startup script.

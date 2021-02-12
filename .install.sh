@@ -109,11 +109,7 @@ git clone --bare git@github.com:milochristiansen/.files.git "$HOME/.cfg"
 
 # Now setup sparse checkout if we are not on a dedicated, local account.
 if [ "$SESSION_TYPE" != "local" ] || $SESSION_SHARED; then
-	wget -q -O "$HOME/.gitsparse" "https://raw.githubusercontent.com/milochristiansen/.files/master/.gitsparse"
-	if [ $? = 0 ]; then
-		echo "Could not download required checkout settings."
-		exit 1
-	fi
+	.config show HEAD:.gitsparse > "$HOME/.gitsparse"
 	ln -s -T "$HOME/.gitsparse" "$HOME/.cfg/info/sparse-checkout"
 	.config sparse-checkout init
 fi
@@ -124,7 +120,7 @@ if [ $? = 0 ]; then
   echo "Checked out config.";
 else
     echo "Backing up pre-existing files.";
-    .config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs /bin/bash -c 'mkdir -p `dirname ".config-backup/$@"`; mv "$@" ".config-backup/$@"' ''
+    .config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -n 1 /bin/bash -c 'mkdir -p `dirname ".config-backup/$@"`; mv "$@" ".config-backup/$@"'
 fi;
 .config checkout
 
