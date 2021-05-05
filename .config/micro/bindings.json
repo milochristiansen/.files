@@ -4,5 +4,6 @@
     "CtrlAltUp": "SpawnMultiCursorUp",
     "CtrlUnderscore": "lua:comment.comment",
     "F6": "command-edit:gorename",
-    "Tab": "Autocomplete|lua:aspell.acceptsug|IndentSelection|InsertTab"
+    "Tab": "Autocomplete|lua:aspell.acceptsug|IndentSelection|InsertTab",
+    "MouseMiddle": "None"
 }
