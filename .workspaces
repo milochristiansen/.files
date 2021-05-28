@@ -2,14 +2,13 @@
 # window <type> <name> <directory>
 # Type can be:
 # * editor: Simple three pane setup with two small panes on the left and one giant one on the right.
-# * deluxe: Same as editor except the right pane is split in two down the middle. For wider/larger screens.
+# * deluxe: Same as editor except the right pane is split in two down the middle and the new riht pane
+#   is then split into two terminals. For wider/larger screens.
 # * terms: A simple 4 way split.
 
-#window deluxe "Ravenna"   "~/Projects/HTML/ravennastructures.com"
-#window deluxe "Werab"     "~/Projects/HTML/werabcontainers" img
 #window deluxe "ECore"     "~/Projects/Modules/ecore"
 
-window deluxe "RSN3"      "~/Projects/HTML/AuthTest"
-window deluxe "BookShelf" "~/Projects/HTML/ApprovedBookShelf"
-window deluxe "Barf"      "~/Projects/HTML/hearthnhome" 117
-window deluxe "Trucking"  "~/Projects/HTML/yodertrucking"
+window deluxe "RSN3"       "~/Projects/HTML/AuthTest"
+window deluxe "Components" "~/Projects/HTML/components"
+window deluxe "BookShelf"  "~/Projects/HTML/ApprovedBookShelf"
+window deluxe "M&R"        "~/Projects/HTML/marcomandrodd"

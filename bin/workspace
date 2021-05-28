@@ -1,17 +1,17 @@
 #! /bin/sh
 
 function window {
-	if [ "$1" = "editor" ]; then 
+	if [ "$1=" = "editor=" ]; then 
 		tmux neww -n "$2" "cd $3 && zsh"
 		tmux split-window -h -p 80 "cd $3 && zsh -is eval $EDITOR"
 		tmux split-window -v -t 0 -p 75 "cd $3 && zsh -is eval dir $4"
-	elif [ "$1" = "deluxe" ]; then
+	elif [ "$1=" = "deluxe=" ]; then
 		tmux neww -n "$2" "cd $3 && zsh"
 		tmux split-window -h -p 80 "cd $3 && zsh -is eval $EDITOR"
 		tmux split-window -h "cd $3 && zsh"
 		tmux split-window -v "cd $3 && zsh"
 		tmux split-window -v -t 0 -p 75 "cd $3 && zsh -is eval dir $4"
-	elif [ "$1" = "terms" ]; then
+	elif [ "$1=" = "terms=" ]; then
 		tmux neww -n "$2" "cd $3 && zsh"
 		tmux split-window -h "cd $3 && zsh"
 		tmux split-window -v -t 0 "cd $3 && zsh"
@@ -21,28 +21,49 @@ function window {
 	fi
 }
 
-tmux has-session -t Main 2>/dev/null
+function checksession {
+	tmux has-session -t "WSpaces" 2>/dev/null
 
-if [ $? != 0 ]; then
-	if [[ "$1" == "restart" ]]; then
-		tmux kill-session -t Main
+	if [ $? != 0 ]; then
+		if [[ "$1=" == "restart=" ]]; then
+			tmux kill-session -t "WSpaces"
+		fi
+
+		tmux new -s "WSpaces" -n "Home" -d -x - -y - 'cd ~ && zsh'
+		tmux split-window -h "cd ~ && zsh"
+		tmux split-window -v -t 0 "cd ~ && zsh"
+		tmux split-window -v -t 2 "cd ~ && zsh"
+
+		if [[ "$1=" != "bare=" ]]; then
+			source ~/.workspaces
+		fi
 	fi
 
-	tmux new -s Main -n Home -d -x - -y - 'cd ~ && zsh'
-	tmux split-window -h "cd ~ && zsh"
-	tmux split-window -v -t 0 "cd ~ && zsh"
-	tmux split-window -v -t 2 "cd ~ && zsh"
+	tmux select-window -t "Home"
+	tmux attach-session -t "WSpaces"
+}
 
-	source ~/.workspaces
-
-	tmux select-window -t Home
-fi
-
-if [ "$1" = "new" ]; then
+if [ "$1=" = "bare=" ]; then
+	checksession bare
+elif [ "$1=" = "restart=" ]; then
+	checksession restart
+elif [ "$1=" = "new=" ]; then
+	checksession
 	window "$2" "$3" "$4"
-elif [ "$1" == "kill" ]; then
-	tmux kill-session -t Main
+elif [ "$1=" == "-h=" ]; then
+	echo "workspace"
+	echo "  Starts the workspace tmux session or attaches to the existing one, loading options from ~/.workspaces"
+	echo "workspace restart"
+	echo "  Kills the current session and creates a new one, loading options from ~/.workspaces"
+	echo "workspace bare"
+	echo "  Starts a session without loading ~/.workspaces If a session exists attach that instead."
+	echo "workspace new \<type\> \<name\> \<path\> \[\<filters\>\]"
+	echo "  Creates a new workspace tab. Add an entry to ~/.workspaces to make it create on startup."
+	echo "    Valid types: editor deluxe terms"
+	echo "workspace kill"
+	echo "  Kills the workspace tmux session."
+elif [ "$1=" == "kill=" ]; then
+	tmux kill-session -t "WSpaces"
 else
-	tmux attach-session -t Main
-	tmux select-window -t Home
+	checksession
 fi
