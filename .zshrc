@@ -135,6 +135,7 @@ pathadd "$HOME/bin"
 # Go support
 if [ -d ~/Projects/Go ]; then
 	export GOPATH=~/Projects/Go
+	pathadd "$GOPATH/bin"
 fi
 export GOPROXY=http://goproxy.raswith.com
 
@@ -164,6 +165,11 @@ gpgconf --launch gpg-agent
 if [ "$SESSION_TYPE" = "local" ]; then
 	# If git refuses to push code, run this and it will make the pin entry program work.
 	alias fixpin='gpg-connect-agent updatestartuptty /bye >/dev/null'
+
+	if [ ! $SESSION_SHARED ]; then
+		# I'm running rootless docker on my system, so make sure that works.
+		export DOCKER_HOST=unix:///run/user/1000/docker.sock
+	fi
 fi
 
 # ID for my GPG key
