@@ -1,10 +1,13 @@
 package main
 
-import "os"
-import "fmt"
-import "sort"
-import "github.com/alessio/shellescape"
-import "golang.org/x/crypto/ssh/terminal"
+import (
+	"fmt"
+	"os"
+	"sort"
+
+	"github.com/alessio/shellescape"
+	"golang.org/x/term"
+)
 
 const (
 	T         = "├── "
@@ -44,7 +47,7 @@ var Width = 0
 var Filters = map[string]bool{".git": true, "node_modules": true}
 
 func main() {
-	width, _, err := terminal.GetSize(int(os.Stdin.Fd()))
+	width, _, err := term.GetSize(int(os.Stdin.Fd()))
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -71,7 +74,17 @@ func walkDIR(path string, depths []string, limit int) {
 	if err != nil {
 
 	}
-	sort.Sort(SortedFiles(files))
+	sort.Slice(files, func(i, j int) bool {
+		// Files before directories
+		if !files[i].IsDir() && files[j].IsDir() {
+			return false
+		}
+		if files[i].IsDir() && !files[j].IsDir() {
+			return true
+		}
+
+		return files[i].Name() < files[j].Name()
+	})
 
 	if len(files) > limit && limit != 0 {
 		fmt.Printf("%v%v...%v\n", prefix(depths, L), LightRed, EndColor)
@@ -203,21 +216,4 @@ func getExt(name string) string {
 		i--
 	}
 	return ""
-}
-
-// Impliment sorting on a slice of file info objects. Directories firs, then sort by name,
-type SortedFiles []os.FileInfo
-
-func (sf SortedFiles) Len() int      { return len(sf) }
-func (sf SortedFiles) Swap(i, j int) { sf[i], sf[j] = sf[j], sf[i] }
-func (sf SortedFiles) Less(i, j int) bool {
-	// Files before directories
-	if !sf[i].IsDir() && sf[j].IsDir() {
-		return false
-	}
-	if sf[i].IsDir() && !sf[j].IsDir() {
-		return true
-	}
-
-	return sf[i].Name() < sf[j].Name()
 }
