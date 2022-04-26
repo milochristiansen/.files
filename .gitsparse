@@ -1,6 +1,5 @@
 /*
 
-!.alacritty.yml
 #!.config
 #!.config/micro
 #!.config/micro/bindings.json
@@ -22,3 +21,5 @@
 !Projects/Modules/tree.go
 !Projects/Modules/tree/go.mod
 !Projects/Modules/tree/go.sum
+#!.config/kitty
+#!.config/kitty/kitty.conf
