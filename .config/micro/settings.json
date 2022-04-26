@@ -1,5 +1,6 @@
 {
     "colorcolumn": 120,
+    "colorscheme": "geany",
     "diffgutter": true,
     "eofnewline": false,
     "ft:go": {
