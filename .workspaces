@@ -6,9 +6,4 @@
 #   is then split into two terminals. For wider/larger screens.
 # * terms: A simple 4 way split.
 
-#window deluxe "ECore"     "~/Projects/Modules/ecore"
-
-window deluxe "RSN3"       "~/Projects/HTML/AuthTest"
-window deluxe "Components" "~/Projects/HTML/components"
-window deluxe "BookShelf"  "~/Projects/HTML/ApprovedBookShelf"
-window deluxe "M&R"        "~/Projects/HTML/marcomandrodd"
+window deluxe "Ledger" "~/Projects/Modules/ledger"
