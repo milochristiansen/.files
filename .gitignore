@@ -23,3 +23,9 @@
 !Projects/Modules/tree/go.sum
 !.config/kitty
 !.config/kitty/kitty.conf
+!.config/sublime-text-3
+!.config/sublime-text-3/Packages
+!.config/sublime-text-3/Packages/Milo
+!.config/sublime-text-3/Packages/Milo/README.md
+!.config/sublime-text-3/Packages/Milo/Themes
+!.config/sublime-text-3/Packages/Milo/Themes/TerminalNight.tmTheme
