@@ -1,6 +1,5 @@
 *
- 
-!.alacritty.yml
+
 !.config
 !.config/micro
 !.config/micro/bindings.json
