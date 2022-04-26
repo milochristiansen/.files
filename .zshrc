@@ -123,10 +123,11 @@ alias egrep='egrep --color=auto'
 alias ip='ip --color=auto'
 
 # Give me that sweet, sweet mouse action, and don't use a pager for short outputs.
-export LESS="-F --mouse --wheel-lines=3 $LESS"
+export LESS="-F --mouse --wheel-lines=3 -Q $LESS"
 
 # Because I'm not a vim heathen
 if ! $SESSION_SHARED; then
+	export VISUAL=micro
 	export EDITOR=micro
 fi
 
