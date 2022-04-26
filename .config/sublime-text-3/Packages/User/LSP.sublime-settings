@@ -1,0 +1,19 @@
+{
+	"lsp_format_on_save": true,
+    "lsp_code_actions_on_save": {
+        "source.fixAll": true,
+        "source.organizeImports": true
+    },
+
+	"clients":
+	{
+		"gopls":
+		{
+			"enabled": true,
+			"env": {
+				"PATH": "/home/milo/Projects/Go/bin:/usr/bin"
+			}
+		}
+	},
+    "only_show_lsp_completions": true,
+}

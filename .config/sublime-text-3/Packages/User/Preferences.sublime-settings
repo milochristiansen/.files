@@ -1,0 +1,27 @@
+{
+	"added_words":
+	[
+		"gauge",
+		"marshalling"
+	],
+	"color_scheme": "Packages/Milo/Themes/TerminalNight.tmTheme",
+	"default_line_ending": "unix",
+	"detect_indentation": false,
+	"font_face": "Fira Code",
+	"font_size": 11,
+	"git_diff_target": "head",
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"mini_diff": true,
+	"rulers":
+	[
+		120
+	],
+	"show_encoding": true,
+	"show_line_endings": true,
+	"spell_check": true,
+	"theme": "Adaptive.sublime-theme",
+	"update_check": false
+}
