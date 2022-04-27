@@ -1,9 +1,14 @@
+
+# This file is linked to "$HOME/.cfg/info/sparse-checkout"
+# Lines in this file are duplicates of lines in .gitignore, any files that should not be included in non-local sessions
+# should be uncommented in order to exclude them from checkout on those systems.
+
 /*
 
 #!.config
 #!.config/micro
 #!.config/micro/bindings.json
-#.config/micro/settings.json
+#!.config/micro/settings.json
 #!.gitconfig
 #!.gitignore
 #!.gitsparse
@@ -21,15 +26,15 @@
 !Projects/Modules/tree.go
 !Projects/Modules/tree/go.mod
 !Projects/Modules/tree/go.sum
-#!.config/kitty
-#!.config/kitty/kitty.conf
-#!.config/sublime-text-3
-#!.config/sublime-text-3/Packages
-#!.config/sublime-text-3/Packages/Milo
-#!.config/sublime-text-3/Packages/Milo/README.md
-#!.config/sublime-text-3/Packages/Milo/Themes
-#!.config/sublime-text-3/Packages/Milo/Themes/TerminalNight.tmTheme
-#!.config/sublime-text-3/Packages/User
-#!.config/sublime-text-3/Packages/User/Preferences.sublime-settings
-#!.config/sublime-text-3/Packages/User/LSP.sublime-settings
-#!.config/sublime-text-3/Packages/User/JS Custom.sublime-settings
+!.config/kitty
+!.config/kitty/kitty.conf
+!.config/sublime-text-3
+!.config/sublime-text-3/Packages
+!.config/sublime-text-3/Packages/Milo
+!.config/sublime-text-3/Packages/Milo/README.md
+!.config/sublime-text-3/Packages/Milo/Themes
+!.config/sublime-text-3/Packages/Milo/Themes/TerminalNight.tmTheme
+!.config/sublime-text-3/Packages/User
+!.config/sublime-text-3/Packages/User/Preferences.sublime-settings
+!.config/sublime-text-3/Packages/User/LSP.sublime-settings
+!.config/sublime-text-3/Packages/User/JS Custom.sublime-settings
