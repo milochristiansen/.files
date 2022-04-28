@@ -1,9 +1,13 @@
 {
     "Alt-/": "lua:comment.comment",
+    "Alt-d": "command:definition",
+    "Alt-f": "command:format",
+    "Alt-k": "command:hover",
+    "Alt-r": "command:references",
     "CtrlAltDown": "SpawnMultiCursorDown",
     "CtrlAltUp": "SpawnMultiCursorUp",
+    "CtrlSpace": "command:lspcompletion",
     "CtrlUnderscore": "lua:comment.comment",
-    "F6": "command-edit:gorename",
-    "Tab": "Autocomplete|lua:aspell.acceptsug|IndentSelection|InsertTab",
-    "MouseMiddle": "None"
+    "MouseMiddle": "None",
+    "Tab": "Autocomplete|lua:aspell.acceptsug|IndentSelection|InsertTab"
 }

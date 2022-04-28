@@ -66,7 +66,6 @@ if ! command -v micro; then
 	curl https://getmic.ro | bash
 	popd
 
-	~/bin/micro -plugin install go
 	~/bin/micro -plugin install quoter
 	~/bin/micro -plugin install manipulator
 	~/bin/micro -plugin install aspell
@@ -82,6 +81,10 @@ if [ "SESSION_TYPE" = "local" ]; then
 	pushd ~/Projects/Modules/tree
 	go build -o ~/bin/dir
 	popd
+
+	# Better go support for Micro
+	go install golang.org/x/tools/gopls@latest
+	git clone https://github.com/AndCake/micro-plugin-lsp ~/.config/micro/plug/lsp
 fi
 
 # tmux

@@ -15,7 +15,6 @@
         "aspell.args": "--mode=ccpp",
         "aspell.check": "on"
     },
-    "gofmt": true,
     "indentchar": "\t",
     "mkparents": true,
     "softwrap": true
