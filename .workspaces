@@ -6,4 +6,5 @@
 #   is then split into two terminals. For wider/larger screens.
 # * terms: A simple 4 way split.
 
-window deluxe "Ledger" "~/Projects/Modules/ledger"
+window deluxe "RSN" "~/Projects/Servers/RSN"
+window deluxe "CarScraper" "~/Projects/Modules/CarScraper"
