@@ -38,3 +38,4 @@
 !.config/sublime-text-3/Packages/User/Preferences.sublime-settings
 !.config/sublime-text-3/Packages/User/LSP.sublime-settings
 !.config/sublime-text-3/Packages/User/JS Custom.sublime-settings
+#!bin/netstatus

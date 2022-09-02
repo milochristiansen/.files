@@ -1,0 +1,92 @@
+#!/bin/sh
+
+previous="n"
+counter=0
+starttime=`date +%s`
+
+# Display a duration in seconds as a d.hh:mm:ss
+function displaydur {
+	# It would be possible to do this with the date command in a slightly hacky
+	# way, but very long durations would possibly break. This is more reliable.
+	local d=$(($1/60/60/24))
+	local h=$(($1/60/60%24))
+	local m=$(($1/60%60))
+	local s=$(($1%60))
+
+	printf "%d.%02d:%02d:%02d" $d $h $m $s
+}
+
+# Play a low frequency "boop" sound.
+function boop {
+	ffplay -f lavfi -i "sine=frequency=200:duration=0.15" -af "volume=15dB" -autoexit -nodisp >/dev/null 2>&1
+}
+
+# Print the full status in the current line, erasing the line first.
+function printstatus {
+	local seconds=$((`date +%s` - $starttime))
+
+	local status="  UP"
+	if [ "$current" = "d" ]; then
+		status="DOWN"
+	fi
+
+	printf "\r\e[K%s at: %s Elapsed: %s Pings: %s" "$status" `date -d "@$starttime" +"%Y-%m-%dT%H:%M:%S%z"` `displaydur $seconds` $counter
+}
+
+# Handle updating the status line and updating the internal state. Two arguments
+# are expected, the new status (either 'u' or 'd' for "up" or "down") and the
+# time that the check was done as the standard seconds since epoch.
+function dostatusline {
+	current=$1
+	time=$2
+
+	# If the status has not changed, refresh the current status line.
+	if [ "$current" = "$previous" ]; then
+		counter=$(($counter + 1))
+		printstatus
+		return
+	fi
+
+	# Close out last line
+	if [ "$previous" != "n" ]; then
+		printf "\n"
+	fi
+
+	# Reset state
+	counter=1
+	starttime=$time
+	previous="$current"
+
+	# Print next status line
+	printstatus
+
+	# Make alert sound
+	boop
+}
+
+while true; do
+	# Grab the time 5 seconds into the future.
+	then=`date -d "5 seconds" +%s`
+
+	# Grab the time we started the ping, this way timeout will properly report that
+	# the network was down at the time the ping started, not when it times out.
+	now=`date +%s`
+
+	# We ping 1.1.1.1 as our indicator of connection state for two reasons:
+	# A) It will always be there, and if not something is seriously wrong and most of the internet
+	#    will probably not work anyway.
+	# B) By using an IP and not a name, we avoid waiting for DNS to fail before pinging leading to
+	#    longer delays than expected when the connection is down.
+	ping -c 1 -W 5 -q 1.1.1.1 >/dev/null 2>&1
+	if [ $? = 0 ]; then
+		dostatusline "u" $now
+	else
+		dostatusline "d" $now
+	fi
+
+	# Sleep until we reach the previously calculated "five seconds from now" value.
+	sleeptime=$(($then - `date +%s`))
+	if [ $sleeptime -gt 0 ]; then
+		sleep $sleeptime >/dev/null 2>&1
+	fi
+done
