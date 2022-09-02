@@ -126,7 +126,7 @@ alias ip='ip --color=auto'
 export LESS="-F --mouse --wheel-lines=3 -Q $LESS"
 
 # Because I'm not a vim heathen
-if ! $SESSION_SHARED; then
+if ! $($SESSION_SHARED); then
 	export VISUAL=micro
 	export EDITOR=micro
 fi
@@ -139,6 +139,11 @@ if [ -d ~/Projects/Go ]; then
 	pathadd "$GOPATH/bin"
 fi
 export GOPROXY=http://goproxy.raswith.com
+
+# RP2040 support
+if [ -d ~/Projects/RP2040 ]; then
+	export PICO_SDK_PATH=~/Projects/RP2040/pico-sdk/
+fi
 
 # Powerline prompt
 powerline-daemon -q
@@ -167,7 +172,7 @@ if [ "$SESSION_TYPE" = "local" ]; then
 	# If git refuses to push code, run this and it will make the pin entry program work.
 	alias fixpin='gpg-connect-agent updatestartuptty /bye >/dev/null'
 
-	if [ ! $SESSION_SHARED ]; then
+	if [ ! $($SESSION_SHARED) ]; then
 		# I'm running rootless docker on my system, so make sure that works.
 		export DOCKER_HOST=unix:///run/user/1000/docker.sock
 	fi
