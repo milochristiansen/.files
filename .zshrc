@@ -138,7 +138,7 @@ if [ -d ~/Projects/Go ]; then
 	export GOPATH=~/Projects/Go
 	pathadd "$GOPATH/bin"
 fi
-export GOPROXY=http://goproxy.raswith.com
+#export GOPROXY=http://goproxy.raswith.com
 
 # RP2040 support
 if [ -d ~/Projects/RP2040 ]; then
