@@ -8,7 +8,7 @@
 	"default_line_ending": "unix",
 	"detect_indentation": false,
 	"font_face": "Fira Code",
-	"font_size": 11,
+	"font_size": 10,
 	"git_diff_target": "head",
 	"ignored_packages":
 	[
