@@ -7,4 +7,7 @@
 # * terms: A simple 4 way split.
 
 window deluxe "RSN" "~/Projects/Servers/RSN"
+window deluxe "Hiveworks" "~/Projects/Servers/Hiveworks"
+window deluxe "Timeclock" "~/Projects/Servers/Timeclock"
 window deluxe "CarScraper" "~/Projects/Modules/CarScraper"
+window deluxe "SFI" "~/Projects/Servers/sfi"

@@ -2,17 +2,17 @@
 
 function window {
 	if [ "$1=" = "editor=" ]; then 
-		tmux neww -n "$2" "cd $3 && zsh"
-		tmux split-window -h -p 80 "cd $3 && zsh -is eval $EDITOR"
-		tmux split-window -v -t 0 -p 75 "cd $3 && zsh -is eval dir $4"
+		tmux new-window -t "WSpaces:" -n "$2" "cd $3 && zsh"
+		tmux split-window -h -l 80% "cd $3 && zsh -is eval $EDITOR"
+		tmux split-window -v -t 0 -l 75% "cd $3 && zsh -is eval dir $4"
 	elif [ "$1=" = "deluxe=" ]; then
-		tmux neww -n "$2" "cd $3 && zsh"
-		tmux split-window -h -p 80 "cd $3 && zsh -is eval $EDITOR"
+		tmux new-window -t "WSpaces:" -n "$2" "cd $3 && zsh"
+		tmux split-window -h -l 80% "cd $3 && zsh -is eval $EDITOR"
 		tmux split-window -h "cd $3 && zsh"
 		tmux split-window -v "cd $3 && zsh"
-		tmux split-window -v -t 0 -p 75 "cd $3 && zsh -is eval dir $4"
+		tmux split-window -v -t 0 -l 75% "cd $3 && zsh -is eval dir $4"
 	elif [ "$1=" = "terms=" ]; then
-		tmux neww -n "$2" "cd $3 && zsh"
+		tmux new-window -t "WSpaces:" -n "$2" "cd $3 && zsh"
 		tmux split-window -h "cd $3 && zsh"
 		tmux split-window -v -t 0 "cd $3 && zsh"
 		tmux split-window -v -t 2 "cd $3 && zsh"
@@ -48,8 +48,16 @@ if [ "$1=" = "bare=" ]; then
 elif [ "$1=" = "restart=" ]; then
 	checksession restart
 elif [ "$1=" = "new=" ]; then
-	checksession
 	window "$2" "$3" "$4"
+elif [ "$1=" = "close=" ]; then
+	if [ "$2=" = "Home=" ]; then
+		echo "You cannot close the Home workspace."
+		exit
+	elif [ "$2=" = "=" ]; then
+		echo "Please specify a workspace to close."
+		exit
+	fi
+	tmux kill-window -t "WSpaces:$2"
 elif [ "$1=" == "-h=" ]; then
 	echo "workspace"
 	echo "  Starts the workspace tmux session or attaches to the existing one, loading options from ~/.workspaces"
@@ -60,6 +68,8 @@ elif [ "$1=" == "-h=" ]; then
 	echo "workspace new \<type\> \<name\> \<path\> \[\<filters\>\]"
 	echo "  Creates a new workspace tab. Add an entry to ~/.workspaces to make it create on startup."
 	echo "    Valid types: editor deluxe terms"
+	echo "workspace close \<name\>"
+	echo "  Close a given workspace by name."
 	echo "workspace kill"
 	echo "  Kills the workspace tmux session."
 elif [ "$1=" == "kill=" ]; then
