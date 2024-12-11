@@ -14,6 +14,7 @@
 	[
 		"Vintage"
 	],
+	"index_files": true,
 	"mini_diff": true,
 	"rulers":
 	[

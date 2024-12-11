@@ -8,7 +8,6 @@
 	ui = true
 [url "git@gitlab.com:"]
 	insteadOf = https://gitlab.com/
-
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [pull]
@@ -19,3 +18,6 @@
 	gpgsign = true
 [init]
 	defaultBranch = master
+[safe]
+	directory = /home/milo/.var/app/com.core447.StreamController/data/plugins/com_core447_Clocks
+	directory = /home/milo/.var/app/com.core447.StreamController/data/plugins/com_core447_Clocks
